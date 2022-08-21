@@ -1,0 +1,27 @@
+#include <iostream>
+using namespace std;
+
+int pw2 ( int  n) {
+    
+    if ( n == 0 ) return 1 ;
+    
+    return 2* pw2(n-1) ; 
+}
+
+
+float npw2 ( float  n) {
+    
+    if ( n == 0 ) return 1 ;
+    
+    return 0.5 * npw2(n+1) ; 
+}
+
+int main()
+{
+    int n = 5 ;
+    float m = -5 ;
+    cout << pw2(n) << endl  ; 
+    
+    cout  << npw2(m) ; 
+    return 0;
+}
