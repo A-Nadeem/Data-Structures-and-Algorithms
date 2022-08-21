@@ -1,0 +1,33 @@
+#include <iostream>
+
+using namespace std;
+
+void sayDigits (int n) {
+    if (n <= 0 ) return ;
+    
+    sayDigits (n/10) ; 
+    
+    int digit = (n % 10) ;
+    
+    if (digit == 0) cout << "zero " ;
+    if (digit == 1) cout << "one " ;
+    if (digit == 2) cout << "two " ;
+    if (digit == 3) cout << "three " ;
+    if (digit == 4) cout << "four " ;
+    if (digit == 5) cout << "five " ;
+    if (digit == 6) cout << "six " ;
+    if (digit == 7) cout << "seven " ;
+    if (digit == 8) cout << "eight " ;
+    if (digit == 9) cout << "nine " ;
+    
+     
+    
+}
+
+int main()
+{
+    int n = 40190; 
+    sayDigits(n) ;
+
+    return 0;
+}
