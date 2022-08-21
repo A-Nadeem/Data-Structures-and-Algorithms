@@ -1,0 +1,62 @@
+#include <iostream>
+using namespace std;
+
+// First Approach
+
+void InsertionSort(int arr[] , int  i, int n) {
+    if ( i == n ) return ;
+    
+   
+    
+    int last = arr[i] ;
+    int j = i - 1 ;  
+  
+    while (j >= 0 && last < arr[j]) {
+        arr[j+1] = arr[j] ;
+        j-- ;
+        
+    } 
+    
+    arr[j+1] = last ;
+    
+ InsertionSort(arr, i+1, n ) ;    
+    
+}
+
+// Better Approach
+
+void insertionSortRecursive(int arr[], int n)
+{
+    // Base case
+    if (n <= 1)
+        return;
+ 
+    // Sort first n-1 elements
+    insertionSortRecursive( arr, n-1 );
+ 
+
+    int last = arr[n-1];
+    int j = n-2;
+ 
+   
+    while (j >= 0 && arr[j] > last)
+    {
+        arr[j+1] = arr[j];
+        j--;
+    }
+    arr[j+1] = last;
+}
+
+
+
+
+int main()
+{
+    int arr[5] = {1,5,3,8,0} ;
+    InsertionSort(arr,1,5) ;
+    
+    for(int i = 0 ; i < 5 ; i++)
+        cout<<arr[i]<<" " ;
+    
+    return 0;
+}
