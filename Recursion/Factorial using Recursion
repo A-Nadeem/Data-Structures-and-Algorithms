@@ -1,0 +1,29 @@
+#include <iostream>
+
+using namespace std;
+
+int factorial(int n ) {
+    if (n == 0 ) return 1 ;  // base case
+ /*   
+    int sp = factorial(n-1) ; // smaller problem
+    int bp = n * sp ;       // bigger problem
+    
+    return bp  ;    */
+    
+    
+    return n * factorial(n-1) ; 
+    }
+    
+    
+
+int main()
+{
+    int n =  6 ; 
+    int ans ;
+    
+    ans = factorial(n) ; 
+    cout << ans ;
+    
+
+    return 0;
+}
