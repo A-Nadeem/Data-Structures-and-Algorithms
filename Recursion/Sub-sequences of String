@@ -1,0 +1,27 @@
+void solve (string str,int i, string op , vector<string>& ans) {
+    if ( str[i] == '\0') {
+        if (op.length() > 0 ) {
+        ans.push_back(op) ;
+        }
+        return ; 
+        
+    }
+    //exclude 
+    solve(str, i+1, op, ans) ;
+    // include 
+    char elem = str[i] ;
+    op.push_back(elem) ; 
+    solve(str, i+1 , op, ans) ; 
+    
+    
+}
+
+
+vector<string> subsequences(string str){
+    int i =  0 ;
+    string op = ""; 
+    vector<string> ans; 
+    solve(str, i, op, ans) ;
+    return ans ; 
+    
+}
