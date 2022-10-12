@@ -1,0 +1,79 @@
+#include <iostream>
+using namespace std;
+
+class Node  {
+    public :
+    int data ;
+    Node* next ; 
+    
+    Node(int data ) {
+        this-> data = data ; 
+        this->next = NULL ; 
+    }
+    
+    ~Node() {
+        cout<< "memory Freed" << endl ; 
+    }
+    
+} ;
+
+void display(Node* head ) {
+        if (head == NULL) {
+            cout<<endl ; 
+            return ;
+        }
+        cout << head->data << " " ; 
+        display(head->next) ; 
+    } 
+
+void create (int a[], int n , Node* &head, Node* &tail ) {
+        Node*  first = new Node(a[0]) ; 
+        head = first ;
+        tail = first ; 
+    
+    for (int i = 1 ; i < n  ; i++ ) {
+            Node* n = new Node(a[i]) ; 
+            tail->next = n ;
+            tail = n ;
+    }
+}
+
+void insertSorted(Node* &head, int elem ) {
+    
+    Node* pos = head ; 
+    Node* prev = NULL ; 
+    
+    Node* n = new Node(elem) ;
+    
+    while ( pos != NULL && pos->data <= elem ) {    // (pos->data <=elem && pos!= NULL) does not works but this works
+        prev = pos; 
+        pos = pos->next ;
+    }
+    
+    if (prev == NULL ) {
+        n->next = head ; 
+        head = n ; 
+        
+        return ; 
+    }
+    
+    n->next = prev->next ; 
+    prev->next = n ; 
+    
+    
+}
+
+int main()
+{
+  int a[5] = {2,10,20,30,44} ;
+    Node* head = NULL ;
+    Node* tail = NULL ;
+    
+    create (a,5,head,tail) ;
+    display(head) ; 
+    
+    insertSorted( head, 50 ) ;
+    display(head) ; 
+
+    return 0;
+}
