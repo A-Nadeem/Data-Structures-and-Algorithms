@@ -1,0 +1,95 @@
+#include <iostream>
+using namespace std;
+
+class Node  {
+    public :
+    int data ;
+    Node* next ; 
+    
+    Node(int data ) {
+        this-> data = data ; 
+        this->next = NULL ; 
+    }
+    
+    ~Node() {
+        cout<< "memory Freed" << endl ; 
+    }
+    
+} ;
+
+void display(Node* head ) {
+        if (head == NULL) {
+            cout<<endl ; 
+            return ;
+        }
+        cout << head->data << " " ; 
+        display(head->next) ; 
+    } 
+
+void insert (int a[], int n , Node* &head, Node* &tail ) {
+        Node*  first = new Node(a[0]) ; 
+        head = first ;
+        tail = first ; 
+    
+    for (int i = 1 ; i < n  ; i++ ) {
+            Node* n = new Node(a[i]) ; 
+            tail->next = n ;
+            tail = n ;
+            
+    }
+    
+}
+
+void  rremoveDuplicate(Node* head ) {
+    Node* pos = head->next ;
+    
+    while(head->next ) {
+       
+        if (head->next->data == head->data) {
+            
+            head->next = head->next->next ; 
+        }
+        
+        else {
+            head = head->next ; 
+        }
+        
+    }   
+    
+}
+
+void  removeDuplicate(Node* head ) {
+    Node* pos = head->next ;
+    
+    while(pos) {
+       
+        if (pos->data == head->data) {
+            
+            head->next = pos->next ;
+            delete pos ; 
+            pos = head->next ; 
+        }
+        
+        else {
+            head = pos ;
+            pos = pos->next ; 
+        }
+        
+    }   
+    
+}
+
+int main()
+{
+    int a[10] = {0,1,1,3,4,4,4,4,4,5} ;
+    Node* head = NULL ;
+    Node* tail = NULL ;
+    
+    insert(a,10,head,tail) ;
+    display(head) ; 
+    
+    rremoveDuplicate(head) ;
+    display(head) ; 
+
+    return 0;
+}
