@@ -1,0 +1,115 @@
+#include <iostream>
+using namespace std;
+
+class Node {
+    public :
+        int data ;
+        Node* next ;
+        
+        
+    Node(int data)    {
+    
+        this->data =data ; 
+        next = NULL ;
+    }
+} ;
+
+void create (int a[], int n , Node* &head, Node* &tail ) {
+        Node*  first = new Node(a[0]) ; 
+        head = first ;
+        tail = first ; 
+        first->next = first ; 
+        
+    
+    for (int i = 1 ; i < n  ; i++ ) {
+            Node* n = new Node(a[i]) ;
+            n->next =  tail -> next ; // or n->next = head , coz tail->next will be always head only
+            tail->next = n ;
+            tail = n ;
+    }
+}
+
+void display (Node* head) {
+    Node* pos = head ; 
+    
+    do {
+       cout << pos->data<< " " ; 
+        pos= pos->next ; 
+    }
+    while ( pos != head ) ; 
+    cout << endl ; 
+}
+
+int length(Node* head) {
+    int count = 0 ;
+    Node* pos = head ; 
+    do {
+        count ++ ; 
+        pos= pos->next ; 
+    }
+    while (pos != head ) ; 
+    
+    return count ; 
+}
+
+ /* void rDisplay ( Node* head ) {
+    
+    if ( p->next = head ) 
+} 
+*/
+
+
+void insert (Node* &head, int elem, int index ) {
+    Node* pos = head ;
+    Node* n = new Node(elem) ;
+    
+    if (index < 0 || index > length(head )) {
+        cout << "INVALID" ;                       // checking validity of Index 
+        return ; 
+    }
+    
+    
+    if (head == NULL ) {
+        head = n ;                  // empty Linked List 
+        n->next = head ; 
+    }
+    
+
+if (index == 0 ) {
+ 
+    while ( pos->next != head ){
+        pos = pos->next   ;    // pos is at last index now    
+    }
+    
+       pos->next = n ; 
+        n->next = head ;
+        head = n  ; 
+        return ;
+    }
+    
+    for (int i = 0 ; i < index-1 ; i++ ) {
+        pos = pos->next; 
+    }
+    
+    n->next = pos->next ; 
+    pos->next = n ; 
+    
+}
+
+int main()
+{
+    
+     int a[5] = {2,10,20,30,44} ;
+    Node* head = NULL ;
+    Node* tail = NULL ;
+    
+    create (a,5,head,tail) ;
+    display(head) ;  
+    
+    insert (head, 50 , 6 ) ;
+     display(head) ; 
+     
+     
+     return 0  ;
+    
+}
