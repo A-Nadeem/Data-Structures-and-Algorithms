@@ -1,0 +1,104 @@
+#include <iostream>
+using namespace std;
+
+class Node  {
+    public :
+    int data ;
+    Node* next ; 
+    
+    Node(int data ) {
+        this-> data = data ; 
+        this->next = NULL ; 
+    }
+    
+    ~Node() {
+        cout<< "memory Freed" << endl ; 
+    }
+    
+} ;
+
+int Length(Node* head) {
+    int count = 0 ; 
+    while ( head ) {
+        count++ ;
+        head = head->next ; 
+    }
+    return count ; 
+}
+
+
+void display(Node* head ) {
+        if (head == NULL) {
+            cout<<endl ; 
+            return ;
+        }
+        cout << head->data << " " ; 
+        display(head->next) ; 
+    } 
+
+void create (int a[], int n , Node* &head, Node* &tail ) {
+        Node*  first = new Node(a[0]) ; 
+        head = first ;
+        tail = first ; 
+    
+    for (int i = 1 ; i < n  ; i++ ) {
+            Node* n = new Node(a[i]) ; 
+            tail->next = n ;
+            tail = n ;
+    }
+}
+
+
+int middleElement(Node* head ) {
+    int l = Length(head) ; 
+    if (l==0) { 
+        cout<< "empty" ; 
+        return -1 ;
+    }
+    if (l%2 == 0 ) l = l/2 ;
+    else l = l/2 + 1 ;
+    
+    Node* pos = head ; 
+    
+    for (int i = 1 ; i < l ; i++ ) {
+        pos = pos->next ; 
+    }
+    
+    return pos->data ; 
+
+    
+}
+
+            // better method 
+            
+int middle(Node* head) {
+    Node* p = head ;
+    Node* q = head ; 
+    
+    while ( q ) {
+        q = q->next ; 
+        if (q) q = q->next  ;
+        
+        if (q) p = p->next ; 
+    }
+    
+    return p->data ; 
+    
+}            
+
+
+
+int main() {
+int a[6] = {2,10,15,20,25,30} ;
+    Node* head = NULL ;
+    Node* tail = NULL ;
+    
+    create (a,6,head,tail) ;
+    display(head) ; 
+    
+    cout << Length(head) << endl;
+    
+    cout << middle(head) ; 
+    
+    return 0 ;
+}
