@@ -1,0 +1,171 @@
+#include <iostream>
+using namespace std;
+
+class Node {
+    public :
+        int data ;
+        Node* next ;
+        Node* prev ; 
+        
+        Node( int data ) {
+            this->data = data ;
+            this->next = NULL ;
+            this->prev = NULL ;
+        }
+        
+        ~Node(){
+            cout << " memory has been freed " << endl; 
+        }
+        
+} ; 
+
+void print(Node* head ){
+    
+    while (head != NULL ) {
+        cout << head->data << " " ; 
+        head=head->next ; 
+    }
+    cout << endl ;  
+}
+
+int getLength(Node* head ){
+   
+    Node* pos = head ; 
+    int c = 0 ; 
+    while (pos != NULL ) {
+        c = c + 1 ; 
+        pos=pos->next ; 
+    }
+   
+    return c ; 
+}
+
+
+void create ( Node* &head, int a[], int n ) {
+  
+    Node* first = new Node (a[0]) ; 
+    head = first ;
+    Node* tail = head ; 
+    
+    for ( int i = 1 ; i < n ; i++ ) {
+        Node* n = new Node (a[i]) ;
+        tail->next = n ; 
+        n->prev = tail ;
+        tail  = n; 
+    }
+}
+
+void insertByPos( Node* &head , int index , int elem) {
+   
+   Node* n = new Node(elem) ;
+   
+   Node* pos = head ; 
+   
+   if ( index < 0 || index > getLength (head) ) {
+       cout << " Invalid  " ; 
+       return ; 
+   }
+   
+   if (head==NULL) {
+         head = n ;
+         return ; 
+       } 
+   
+   if ( index == 0 ) {
+       n->next = head ; 
+       head->prev = n ;
+       head = n ; 
+       return ; 
+   }
+   
+   for (int i = 0 ; i < index-1 ; i++ ) {
+       pos = pos->next ; 
+   }
+   
+   n->next = pos->next ; 
+   n->prev = pos ; 
+   
+   pos->next = n ; 
+   if ( n->next ) n->next->prev = n ; 
+
+   
+   }
+
+
+void deleteByPos( Node* &head , int index ) {
+   
+   Node* pos = head ; 
+   
+   if ( index < 1 || index > getLength (head) ) {
+       cout << "Invalid " ; 
+       return ; 
+   }
+   
+   if (index == 1 ) { 
+       head = head->next ; 
+       if(head) head->prev = NULL ;  //check condition
+       delete pos ; 
+       return ; 
+   }
+   
+   for (int i = 1 ; i < index ; i++ ) {
+       pos = pos->next ; 
+   }
+   pos->prev->next = pos->next ; 
+   if (pos->next) pos->next->prev = pos->prev ;   //check condition
+   
+   pos->next = pos->prev = NULL ;     //  extra steps ???
+   
+   
+}
+
+
+void rev(Node* head ) {
+    Node* pos = head ;
+    while (pos->next != NULL ) pos = pos->next ; 
+    
+    while (pos != NULL ) {
+        cout << pos->data<< " " ;
+        pos=pos->prev ; 
+    } cout << endl ; 
+    
+}
+
+void reverse(Node* &head) {
+    Node* pos = head ; 
+    while (pos != NULL ) {
+        
+        Node* temp = pos->next ;
+        pos->next = pos->prev ; 
+        pos->prev = temp ; 
+        
+        if (pos->prev == NULL ) head = pos ; 
+        pos = pos->prev; 
+    }
+    
+}
+
+int main()
+{
+    int a[5] = {5,10,20,30,40} ;
+    Node* head = NULL ;
+     
+    create ( head, a , 5 ) ;
+    print (head) ; 
+    
+   // cout << endl << head->data << endl; 
+    
+    int l = getLength(head) ; 
+    // cout << endl << l ; 
+    
+    insertByPos(head, 0 , 5) ; 
+    print(head) ;
+    
+    deleteByPos(head,1) ;
+    print(head) ; 
+    
+    reverse(head) ;
+    print(head) ; 
+
+    return 0;
+}
