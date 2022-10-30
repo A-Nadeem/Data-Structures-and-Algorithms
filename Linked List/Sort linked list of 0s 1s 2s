@@ -1,0 +1,61 @@
+// MY APPROACH (FIRST)
+
+Node* sortList(Node *head)
+{      
+   if (head == NULL || head->next == NULL ) return head ; 
+    
+    Node* pos = head ; 
+    Node* end = head ; 
+    Node* prev = head ; 
+    
+    while (end->next) {
+        end = end->next ;
+    }
+    
+    Node* terminate = end ; 
+   
+    while ( pos != terminate) {
+       
+        if (pos==head && pos->data == 0 ) {
+            prev = pos ; 
+            pos = pos->next ; 
+            continue ; 
+        } 
+        if ( pos==head && pos->data == 2 ) {
+            head = head->next ; 
+            end->next = pos ; 
+            end = pos ; 
+            pos->next = NULL ; 
+            pos = head ; 
+            prev = pos ; 
+            continue ; 
+            }
+        if ( pos->data == 0 ) {
+        prev->next = pos->next ; 
+        pos->next = head ; 
+        head = pos ; 
+        pos = prev->next ; 
+        }
+       
+        else if ( pos->data == 2 ) { 
+            prev->next = pos->next ; 
+            end->next = pos ; 
+            pos->next = NULL ; 
+            end = pos ; 
+            pos= prev->next ; 
+        } 
+                 
+        else {
+            prev = pos ; 
+            pos = pos->next; 
+        }
+    }
+    
+    if ( pos->data == 0 ) {
+        prev->next = pos->next ; 
+        pos-> next = head ; 
+        head = pos ;  
+    }
+    
+    return head ;  
+}
