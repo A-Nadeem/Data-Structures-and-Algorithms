@@ -1,0 +1,30 @@
+//{ Driver Code Starts
+//Initial Template for C++
+
+#include<bits/stdc++.h>
+using namespace std;
+
+
+
+//function Template for C++
+
+//Function to reverse the queue.
+queue<int> rev(queue<int> q)
+{   
+    stack<int> s ; 
+    
+    while (!q.empty() ) {
+        int elem = q.front() ;
+        q.pop() ; 
+        
+        s.push(elem) ; 
+    }
+    
+    while (!s.empty() ) {
+        int elem = s.top() ; 
+        s.pop() ; 
+        q.push(elem) ; 
+    }
+    
+    return q;
+} 
