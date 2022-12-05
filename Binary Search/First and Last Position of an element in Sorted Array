@@ -1,0 +1,48 @@
+int firstPos ( vector<int> arr, int n, int x) {
+    int s = 0 ; 
+    int e = n-1 ; 
+    int f = -1 ; 
+    
+    while ( s <= e ) {
+        int mid = s + (e-s)/2 ;
+        
+        if (arr[mid] == x ) {
+            f = mid ; 
+            e = mid - 1 ;
+        }
+        else if ( x > arr[mid] ) s = mid + 1 ; 
+        else e = mid - 1 ; 
+    }
+    return f ; 
+    
+}
+int lastPos ( vector<int> arr, int n, int x) {
+    int s = 0 ; 
+    int e = n-1 ; 
+    int l = -1 ; 
+    
+    while ( s <= e ) {
+        int mid = s + (e-s)/2 ;
+        
+        if (arr[mid] == x ) {
+            l = mid ; 
+            s = mid + 1 ;
+        }
+        else if ( x > arr[mid] ) s = mid + 1 ; 
+        else e = mid - 1 ; 
+    }
+    return l ; 
+    
+}
+
+pair<int, int> findFirstLastPosition(vector<int> &arr, int n, int x)
+{
+	pair<int,int> ans ; 
+    
+    ans.first = firstPos ( arr, n , x ) ;
+    ans.second = lastPos (arr, n , x ) ;
+    
+    return ans ;
+     
+}
+
