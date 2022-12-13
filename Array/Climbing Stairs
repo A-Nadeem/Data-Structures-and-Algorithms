@@ -1,0 +1,30 @@
+class Solution {
+private :
+
+    int recCS(int n ) {
+        if ( n <= 1 ) return 1 ; 
+
+        int prev = recCS(n-2) ; 
+        int curr = recCS(n-1) ; 
+
+        return prev + curr ; 
+    }
+public:
+
+
+    int climbStairs(int n) {
+      /*  int prev = 1 ; 
+        int curr = 1 ; 
+         
+         for (int i = 1 ;  i < n ; i ++ ) {
+             int next = prev + curr ; 
+             prev = curr ; 
+             curr = next ; 
+         }
+
+         return curr ; */
+
+         int ans = recCS(n) ; 
+         return ans ; 
+    }
+};
