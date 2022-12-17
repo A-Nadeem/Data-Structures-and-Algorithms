@@ -1,0 +1,47 @@
+class MyQueue {
+    stack<int> spush ; 
+    stack<int> spop ; 
+public:
+    MyQueue() {
+
+    }
+    
+    void revpush(int x) {
+        if ( spop.empty() ) {
+             spop.push(x) ; 
+            return ;
+        }
+        int temp = spop.top() ;
+        spop.pop() ; 
+        revpush(x) ; 
+        spop.push(temp) ; 
+    }
+    
+    void push(int x) {
+        spush.push(x) ; 
+        revpush(x) ;
+    }
+
+    int pop() {
+        int x = spop.top() ;
+        spop.pop() ; 
+       return x ;  
+    }
+    
+    int peek() {
+        return spop.top() ; 
+    }
+    
+    bool empty() {
+        return spop.empty() ; 
+    }
+};
+
+/**
+ * Your MyQueue object will be instantiated and called as such:
+ * MyQueue* obj = new MyQueue();
+ * obj->push(x);
+ * int param_2 = obj->pop();
+ * int param_3 = obj->peek();
+ * bool param_4 = obj->empty();
+ */
