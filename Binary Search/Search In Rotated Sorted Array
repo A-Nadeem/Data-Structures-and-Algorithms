@@ -1,0 +1,41 @@
+#include <bits/stdc++.h> 
+int pivot (vector<int>& arr, int n ) {
+    int s = 0 ; 
+    int e = n-1  ;
+    if ( arr[s] <= arr[e] ) return s ; 
+    
+    while (s < e) {
+        int mid = s + (e-s)/2 ; 
+        
+        if ( arr[mid] < arr[0] )  e = mid ; 
+        else s = mid+1 ; 
+    }
+    return e ; 
+    
+}
+int binary(vector<int>& arr, int s, int e, int k) {
+
+    while ( s<=e ) {
+        int mid = s + ( e-s)/2 ; 
+        
+        if ( arr[mid] == k) return mid  ;
+       
+        else if ( k > arr[mid] ) s = mid +1 ;
+        else e = mid -1 ; 
+    }
+    return -1 ; 
+}
+
+int findPosition(vector<int>& arr, int n, int k)
+{
+   int p = pivot(arr,n) ;
+
+if ( k <= arr[n-1] ) {
+    int a = binary(arr,p,n-1,k) ;
+    return a ; 
+}
+else {
+    int b = binary(arr,0,p-1,k) ; 
+}
+ 
+}
