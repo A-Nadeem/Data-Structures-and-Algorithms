@@ -1,0 +1,39 @@
+Searh in the original tree, navigating in the both original and cloned trees in the same direction.
+
+
+
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+
+class Solution {
+
+    void rec ( TreeNode* original, TreeNode* cloned, TreeNode* &ans, TreeNode* target ) {
+        if (!original ) return ; 
+
+
+        if ( original== target ) {
+            ans = cloned ;
+            return ;
+        }
+
+        rec(original->left, cloned->left, ans , target ) ; 
+        rec(original->right , cloned->right, ans, target ) ; 
+
+    }
+public:
+    TreeNode* getTargetCopy(TreeNode* original, TreeNode* cloned, TreeNode* target) {
+        TreeNode* ans = NULL ; 
+        rec(original, cloned, ans, target ) ; 
+
+        return ans ; 
+
+
+    }
+};
